@@ -195,12 +195,12 @@ console.log("args", args);
 
 if( args.options.index ){
   var num = index2thetaId( args.options.index );
-  console.log( num );
+  console.log("index : " + args.options.index + ", thetaid : " + num );
 }
 
 if( args.options.thetaid ){
   var num = thetaId2index( args.options.thetaid );
-  console.log( num );
+  console.log("thetaid : " + args.options.thetaid + ", index : " + num );
 }
 
 if( args.options.prefix ){
