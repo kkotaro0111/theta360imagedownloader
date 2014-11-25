@@ -1,7 +1,7 @@
 {
   "name": "thetaDl",
-  "version": "0.0.0",
-  "description": "Download theta data form theta360.com",
+  "version": "0.4.0",
+  "description": "Download theta data from theta360.com",
   "main": "downloader.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
