@@ -75,12 +75,15 @@ function thetaId2index(thetaId){
 }
 
 //THETA公式ページのURLを生成
-function createURLByNum(num){
-  var id = index2thetaId( num );
-  return createURL( id );
-}
-function createURL(thetaId){
-  return thetaURL + "/s/" + thetaId;
+function createURL(id){
+  var url;
+  if( ops.legacy ){
+    url = thetaURL + "/spheres/" + id;
+  }else{
+    url = thetaURL + "/s/" + id;
+  }
+
+  return url;
 }
 
 function checkExistFile( jpg, mp4 ){
@@ -90,9 +93,22 @@ function checkExistFile( jpg, mp4 ){
   return !(existJpg || existMp4);
 }
 
-function pageRequest( idNum, thetaId, url ){
-  var jpg = idNum + "_" + thetaId + ".jpg";
-  var mp4 = idNum + "_" + thetaId + ".mp4";
+function genFileName( idNum, ext, legacy){
+  var fn;
+  if( legacy ){
+    fn = prefix + "legacy_" + idNum + ext;
+  }else{
+    var thetaId = index2thetaId( idNum );
+    fn = prefix + idNum + "_" + thetaId + ext;
+  }
+  return fn;
+
+}
+
+function pageRequest( idNum, url ){
+  var thetaId = index2thetaId( idNum );
+  var jpg = genFileName( idNum, ".jpg", ops.legacy );
+  var mp4 = genFileName( idNum, ".mp4", ops.legacy );
   if( checkExistFile( jpg, mp4 ) ){
     request( url, function(error, response, body){
       if(!error && response.statusCode == 200){
@@ -100,14 +116,14 @@ function pageRequest( idNum, thetaId, url ){
         var $urlText = $("#urlText");
         var imageURL = $urlText.val().replace(/https/, "http");
         var type = $urlText.attr("name");
-        var filename = prefix + idNum + "_" + thetaId + ext[type];
+        var filename = genFileName( idNum, ext[type], ops.legacy );
 
         console.log("image url = ", imageURL);
 
         download( filename , imageURL);
       }else if(!error && response.statusCode == 302){
         var redirectURL = response.Location;
-        pageRequest( redirectURL );
+        pageRequest( idNum, redirectURL );
       }else{
         console.error("ERROR", response.statusMessage);
         ev.emit("done");
@@ -151,11 +167,16 @@ function download( filename, dlURL){
 function next(){
   index += 1;
   if( index <= maxIndex ){
-    var id = index2thetaId( index );
-    var thetaURL = createURL( id );
-    console.log(index, " : ", thetaURL);
+    var parmaURL;
+    if( ops.legacy ){
+      parmaURL = createURL( index );
+    }else{
+      var id = index2thetaId( index );
+      parmaURL = createURL( id );
+    }
+    console.log(index, " : ", parmaURL);
 
-    pageRequest( index, id, thetaURL );
+    pageRequest( index, parmaURL );
   }
 }
 
@@ -203,6 +224,12 @@ argv.option([
     short: 'p',
     type: 'string',
     description: 'ファイル名のプレフィックス。 / を入れるとディレクトリ指定になる'
+  },
+  {
+    name: 'legacy',
+    short: 'l',
+    type: 'boolean',
+    description: 'URLがspheresの分を走査する'
   }
 ]);
 
@@ -243,7 +270,6 @@ console.log("args", args);
 if( ops.start && ops.end ){
   index = ops.start - 1;
   maxIndex = ops.end;
-
   console.log("START DOWNLOAD...");
   ev.on("done", next);
   next();
