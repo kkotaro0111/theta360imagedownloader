@@ -8,20 +8,20 @@ RICOH THETA の公式アップローダーを走査して、そこにアップ�
  - argv
 
 ## Usage
-アップロードされている1個目の画像( http://theta360.com/s/0 )から13万個目の画像( http://theta360.com/s/Xom )をダウンロードしてくる
+アップロードされている1個目の画像( http://theta360.com/s/0 )から13万個目の画像( http://theta360.com/s/Xom )をダウンロードしてくる場合
 ```bash
 $ node donwloader.js -s 0 -e 130000
 ```
 
 ##Options
 <dl>
-  <dt>--start, -s</dt>
+  <dt>--start [num], -s</dt>
   <dd>ダウンロードを開始する通し番号。10進数</dd>
-  <dt>--end, -e</dt>
+  <dt>--end [num], -e</dt>
   <dd>ダウンロードを終了する通し番号。10進数</dd>
-  <dt>--index, -i</dt>
+  <dt>--index [num], -i</dt>
   <dd>10進数の数値を、[0-9A-Za-z]の62進数に変換して表示する</dd>
-  <dt>--thetaid, -t</dt>
+  <dt>--thetaid [string], -t</dt>
   <dd>[0-9A-Za-z]の62進数を、10進数に変換して表示する</dd>
 </dl>
 
