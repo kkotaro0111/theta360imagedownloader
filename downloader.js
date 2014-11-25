@@ -191,26 +191,29 @@ argv.option([
 ]);
 
 var args = argv.run();
+var ops = args.options;
 console.log("args", args);
 
-if( args.options.index ){
-  var num = index2thetaId( args.options.index );
-  console.log("index : " + args.options.index + ", thetaid : " + num );
+if( ops.index ){
+  var num = index2thetaId( ops.index );
+  console.log("index : " + ops.index + ", thetaid : " + num );
 }
 
-if( args.options.thetaid ){
-  var num = thetaId2index( args.options.thetaid );
-  console.log("thetaid : " + args.options.thetaid + ", index : " + num );
+if( ops.thetaid ){
+  var num = thetaId2index( ops.thetaid );
+  console.log("thetaid : " + ops.thetaid + ", index : " + num );
 }
 
-if( args.options.prefix ){
-  prefix = args.options.prefix;
+if( ops.prefix ){
+  prefix = ops.prefix;
   console.log( "prefix : ", prefix );
 }
 
-if( args.options.start && args.options.end ){
-  index = args.options.start - 1;
-  maxIndex = args.options.end;
+if( ops
+
+if( ops.start && ops.end ){
+  index = ops.start - 1;
+  maxIndex = ops.end;
 
   console.log("START DOWNLOAD...");
   ev.on("done", next);
