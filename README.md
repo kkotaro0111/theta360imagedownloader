@@ -19,6 +19,10 @@ $ node downloader.js -s 0 -e 130000
   <dd>ダウンロードを開始する通し番号。10進数</dd>
   <dt>--end [num], -e</dt>
   <dd>ダウンロードを終了する通し番号。10進数</dd>
+  <dt>--start_id [thetaid], -S</dt>
+  <dd>ダウンロードを開始するTHETA ID。[0-9A-Za-z]の62進数</dd>
+  <dt>--end_id [thetaid], -E</dt>
+  <dd>ダウンロードを終了するTHETA ID。[0-9A-Za-z]の62進数</dd>
   <dt>--index [num], -i</dt>
   <dd>10進数の数値を、[0-9A-Za-z]の62進数に変換して表示する</dd>
   <dt>--thetaid [string], -t</dt>
