@@ -65,7 +65,11 @@ function thetaId2index(thetaId){
   ary.reverse();
   var sum = 0;
   for( var i = 0; i < ary.length; i++){
-    sum += charlist.indexOf( ary[i] ) * Math.pow(charlist.length, i);
+    var position = charlist.indexOf( ary[i] );
+    if( position == -1 ){
+      return -1;
+    }
+    sum += position * Math.pow(charlist.length, i);
   }
   return sum;
 }
