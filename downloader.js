@@ -32,8 +32,8 @@ var ext = {
 };
 
 //THETA ID = 100 is INDEX = 3844
-var index = 1123; 
-var maxIndex = 3843;
+var index = 0; 
+var maxIndex = 0;
 
 
 /* *******************************************
