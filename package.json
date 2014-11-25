@@ -1,0 +1,16 @@
+{
+  "name": "thetaDl",
+  "version": "0.0.0",
+  "description": "Download theta data form theta360.com",
+  "main": "downloader.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "request": "~2.48.0",
+    "cheerio": "~0.18.0",
+    "argv": "0.0.2"
+  }
+}
