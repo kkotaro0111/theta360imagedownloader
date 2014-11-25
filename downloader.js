@@ -178,13 +178,25 @@ argv.option([
     name: 'start',
     short: 's',
     type: 'int',
-    description: 'ダウンロードを開始する通し番号を指定します'
+    description: 'ダウンロードを開始する通し番号を指定します。start_idが指定されていたら、start_idが優先されます。'
   },
   {
     name: 'end',
     short: 'e',
     type: 'int',
-    description: 'ダウンロードを終了する通し番号を指定します'
+    description: 'ダウンロードを終了する通し番号を指定します。end_idが指定されていたら、end_idが優先されます。'
+  },
+  {
+    name: 'start_id',
+    short: 'S',
+    type: 'string',
+    description: 'ダウンロードを開始するTHETA IDを指定します。'
+  },
+  {
+    name: 'end_id',
+    short: 'E',
+    type: 'string',
+    description: 'ダウンロードを終了するTHETA IDを指定します。'
   },
   {
     name: 'prefix',
@@ -196,7 +208,6 @@ argv.option([
 
 var args = argv.run();
 var ops = args.options;
-console.log("args", args);
 
 if( ops.index ){
   var num = index2thetaId( ops.index );
@@ -213,7 +224,21 @@ if( ops.prefix ){
   console.log( "prefix : ", prefix );
 }
 
-if( ops
+if( ops.start_id ){
+  var sid = thetaId2index( ops.start_id );
+  if( sid != -1 ){
+    ops.start = sid;
+  }
+}
+
+if( ops.end_id ){
+  var eid = thetaId2index( ops.end_id );
+  if( eid != -1 ){
+    ops.end = eid;
+  }
+}
+
+console.log("args", args);
 
 if( ops.start && ops.end ){
   index = ops.start - 1;
