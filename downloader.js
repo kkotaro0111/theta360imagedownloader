@@ -35,6 +35,8 @@ var ext = {
 var index = 0; 
 var maxIndex = 0;
 
+//ファイル名のプレフィックス。おそらく / でディレクトリが指定可能
+var prefix = "";
 
 /* *******************************************
  *
@@ -94,7 +96,7 @@ function pageRequest( idNum, thetaId, url ){
         var $urlText = $("#urlText");
         var imageURL = $urlText.val().replace(/https/, "http");
         var type = $urlText.attr("name");
-        var filename = idNum + "_" + thetaId + ext[type];
+        var filename = prefix + idNum + "_" + thetaId + ext[type];
 
         console.log("image url = ", imageURL);
 
@@ -179,6 +181,12 @@ argv.option([
     short: 'e',
     type: 'int',
     description: 'ダウンロードを終了する通し番号を指定します'
+  },
+  {
+    name: 'prefix',
+    short: 'p',
+    type: 'string',
+    description: 'ファイル名のプレフィックス。 / を入れるとディレクトリ指定になる'
   }
 ]);
 
@@ -193,6 +201,11 @@ if( args.options.index ){
 if( args.options.thetaid ){
   var num = thetaId2index( args.options.thetaid );
   console.log( num );
+}
+
+if( args.options.prefix ){
+  prefix = args.options.prefix;
+  console.log( "prefix : ", prefix );
 }
 
 if( args.options.start && args.options.end ){
