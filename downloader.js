@@ -118,7 +118,7 @@ function pageRequest( idNum, url ){
         var type = $urlText.attr("name");
         var filename = genFileName( idNum, ext[type], ops.legacy );
 
-        console.log("image url = ", imageURL);
+        console.log("image url : ", imageURL);
 
         download( filename , imageURL);
       }else if(!error && response.statusCode == 302){
@@ -139,7 +139,8 @@ function pageRequest( idNum, url ){
 
 //ファイルを実際にダウンロードする処理
 function download( filename, dlURL){
-  console.log("Donwloading : ",  filename, dlURL );
+  //console.log("Downloading : ",  filename, dlURL );
+  console.log("Downloading : ",  filename );
 
   var outFile = fs.createWriteStream( filename, { flags: "wx"});
   outFile.on("error", function(err){
@@ -174,6 +175,7 @@ function next(){
       var id = index2thetaId( index );
       parmaURL = createURL( id );
     }
+    console.log("============================================");
     console.log(index, " : ", parmaURL);
 
     pageRequest( index, parmaURL );
